@@ -1,0 +1,201 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto&display=swap");
+/* Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --negro: #ececec;
+  }
+}
+/* Opcional */
+/* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+/* Opcional */
+/* Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitamos problemas con las imagenes */
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form, input, textarea, select, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+  /* opcional */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Reseteamos las tablas */
+table, tr, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  background-color: rgb(201, 201, 201);
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+  background-color: rgb(201, 201, 201);
+}
+
+.navbar-nav {
+  font-size: 1.3rem;
+}
+
+.titulaso {
+  font-family: "Dancing Script", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.1)), url(../recursos/imagenes/grande.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 95vh;
+  border: 4px solid rgba(167, 139, 84, 0.8);
+  box-shadow: 4px 3px 2px rgba(167, 139, 84, 0.8);
+}
+.titulaso h1 {
+  text-align: center;
+  padding: 70px 10px;
+  text-shadow: 5px 2px 3px rgba(112, 112, 116, 0.205);
+  font-size: 4rem;
+  color: rgba(167, 139, 84, 0.562);
+}
+
+.footer-majo {
+  color: black;
+}
+.footer-majo ul {
+  padding: 0px;
+  font-size: 0.8rem;
+}
+.footer-majo .img-fluid {
+  max-width: 250px;
+}
+.footer-majo .container-ico {
+  display: flex;
+  flex-direction: row;
+  max-width: 250px;
+}
+.footer-majo .container-ico svg {
+  color: black;
+}
+
+@media screen and (min-width: 576px) {
+  .navbar-nav {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .navbar {
+    position: fixed;
+    width: 100%;
+  }
+  .navbar-nav {
+    font-size: 2rem;
+  }
+  .espacio {
+    height: 126px;
+  }
+  .titulaso h1 {
+    font-size: 6.5rem;
+  }
+}
+
+/*# sourceMappingURL=estilo.css.map */

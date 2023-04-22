@@ -1,0 +1,35 @@
+@media screen and (min-width: 576px){    
+    .navbar-nav{
+        font-size: 1.6rem;
+    }
+
+}
+
+@media screen and (min-width: 768px){
+
+}
+
+@media screen and (min-width: 992px) {
+    .navbar{
+        position: fixed;
+        width: 100%;
+    }
+
+    .navbar-nav{
+        font-size: 2rem;
+    }
+    //dejo este espacio para que el position:fixed en el navbar no se coma una parte del background
+    .espacio{
+        height: 126px;
+    }
+
+    .titulaso h1{
+        font-size: 6.5rem;
+    }
+}
+
+
+@media screen and (min-width: 1200px){
+
+}
+

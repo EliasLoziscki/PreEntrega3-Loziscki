@@ -1,0 +1,22 @@
+.footer-majo{
+    color: black;
+    ul{
+        padding: 0px;
+        font-size: 0.8rem;
+    }
+    .img-fluid{
+        max-width: 250px;
+    }
+
+    .container-ico{
+        display: flex;
+        flex-direction: row;
+        max-width: 250px;
+        svg{
+            color: black;
+        }
+    }
+
+}
+
+
