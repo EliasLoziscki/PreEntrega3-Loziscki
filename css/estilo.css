@@ -129,12 +129,8 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-div {
-  border: 2px solid black;
-}
-
 .navbar {
-  background-color: rgb(201, 201, 201);
+  background-color: transparent;
 }
 
 .navbar-nav {
@@ -162,6 +158,13 @@ div {
   color: rgba(167, 139, 84, 0.562);
 }
 
+h2 {
+  margin-top: 50px;
+  color: black;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
 .selecionaCompra {
   margin: auto;
   margin-top: 55px;
@@ -181,7 +184,7 @@ div {
   padding: auto;
   border: 2px solid rgb(223, 185, 185);
   box-shadow: 4px 0px 4px rgb(192, 166, 166);
-  background-color: rgb(201, 201, 201);
+  background-color: transparent;
 }
 .contenedorCartas .card .card-body {
   height: 220px;
@@ -214,7 +217,7 @@ div {
 
 .btn-close {
   display: inline-block;
-  background-color: red;
+  background-color: rgb(151, 148, 148);
 }
 
 .modal {
@@ -224,6 +227,10 @@ div {
 .carritoTotal {
   font-size: 2rem;
   font-weight: bolder;
+}
+
+.gradienteCarrito {
+  background-image: linear-gradient(69.7deg, rgb(244, 37, 243) 1.4%, rgb(244, 87, 1) 36.2%, rgb(255, 204, 37) 72.2%, rgb(20, 196, 6) 113%);
 }
 
 footer {

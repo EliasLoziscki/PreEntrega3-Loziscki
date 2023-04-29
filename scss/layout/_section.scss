@@ -1,3 +1,9 @@
+h2{
+    margin-top: 50px;
+    color: black;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
 
 .selecionaCompra{
     margin: auto;
@@ -20,7 +26,7 @@
 
         border: 2px solid rgb(223, 185, 185);
         box-shadow: 4px 0px 4px rgb(192, 166, 166);
-        background-color: rgb(201, 201, 201);
+        background-color: transparent;
 
         .card-body{
             height: 220px;
@@ -57,7 +63,7 @@
 }
 .btn-close{
     display: inline-block;
-    background-color: red;
+    background-color: rgb(151, 148, 148);
 }
 
 .modal{
@@ -67,6 +73,10 @@
 .carritoTotal{
     font-size: 2rem;
     font-weight: bolder;
+}
+
+.gradienteCarrito {
+    background-image: linear-gradient( 69.7deg,  rgba(244,37,243,1) 1.4%, rgba(244,87,1,1) 36.2%, rgba(255,204,37,1) 72.2%, rgba(20,196,6,1) 113% );
 }
 
 
