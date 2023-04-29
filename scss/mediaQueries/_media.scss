@@ -2,26 +2,36 @@
     .navbar-nav{
         font-size: 1.6rem;
     }
-
+    .contenedorCartas{
+        max-width: 60%;
+        
+    }
+    .conteiner-carro{
+        max-width: 60%;
+    }
 }
 
 @media screen and (min-width: 768px){
-
+    .contenedorCartas{
+        max-width: 80%;
+    }
+    .conteiner-carro{
+        max-width: 80%;
+    }
 }
 
 @media screen and (min-width: 992px) {
     .navbar{
-        position: fixed;
-        width: 100%;
+
     }
 
     .navbar-nav{
         font-size: 2rem;
     }
     //dejo este espacio para que el position:fixed en el navbar no se coma una parte del background
-    .espacio{
-        height: 126px;
-    }
+    // .espacio{
+    //     height: 126px;
+    // }
 
     .titulaso h1{
         font-size: 6.5rem;

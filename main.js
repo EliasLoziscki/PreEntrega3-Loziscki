@@ -1,155 +1,129 @@
 //creamos una clase para las pinturas
 class Pinturas {
-    constructor(id,marca,color,precioPorLitro){
-        this.id=id
-        this.marca=marca
+    constructor(id,nombre,marca,color,sitio,precio,imagen,cantidad){
+        this.id=id;
+        this.nombre=nombre;
+        this.marca=marca;
         this.color=color;
-        this.precioPorLitro=precioPorLitro;
-    }
-    esMarca(id){
-        return this.id==id;
-    } 
-    devolverColor(){
-            return this.color;
+        this.sitio=sitio;
+        this.precio=precio;
+        this.imagen=imagen;
+        this.cantidad=cantidad
     }
 }
 
-const colorete = new Pinturas(1,"Colorete",["rojo", "amarillo", "verde", "azul", "negro", "blanco", "purpura"],700)
-const colorshu = new Pinturas(2,"Colorshu",["rojo", "amarillo", "verde"],850)
-const dicolor = new Pinturas(3,"Dicolor",["rojo", "amarillo", "azul", "negro", "blanco", "naranja", "morado"],975)
+const albaObrasLatIntAntirreflex = new Pinturas(01,"ALBA OBRAS LAT INT ANTIRREFLEX", "Alba", "blanco", "Interior", 18105, "./recursos/imagenes/ALBA_OBRAS_LAT_INT_ANTIRREFLEX.png",1);
+const albaFrentesYMurosBlanco4 = new Pinturas(02,"ALBA FRENTES Y MUROS BLANCO 4LTS", "Alba", "blanco", "Exterior", 5770, "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",1);
+const albaFrentesYMurosBlanco10 = new Pinturas(03,"ALBA FRENTES Y MUROS BLANCO 10LTS", "Alba", "blanco", "Exterior",  12910, "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",1);
+const albaFrentesYMurosBlanco20 = new Pinturas(04,"ALBA FRENTES Y MUROS BLANCO 20LTS", "Alba", "blanco", "Exterior", 25000, "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",1);
+const casablancaProInterior4 = new Pinturas(05,"CASABLANCA PRO INTERIOR 4LTS", "Casablanca", "blanco", "Interior", 3300, "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",1);
+const casablancaProInterior10 = new Pinturas(06,"CASABLANCA PRO INTERIOR 10LTS", "Casablanca", "blanco", "Interior", 7290, "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",1);
+const casablancaProInterior20 = new Pinturas(07,"CASABLANCA PRO INTERIOR 20LTS", "Casablanca", "blanco", "Interior", 11800, "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",1);
+const casablancaPerformanceExtMateHidrorepelente4 = new Pinturas(08,"CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 4LTS", "Casablanca", "blanco", "Exterior", 4915, "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",1);
+const casablancaPerformanceExtMateHidrorepelente10 = new Pinturas(09,"CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 10LTS", "Casablanca", "blanco", "Exterior", 10850, "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",1);
+const casablancaPerformanceExtMateHidrorepelente20 = new Pinturas(10,"CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 20LTS", "Casablanca", "blanco", "Exterior", 19800, "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",1);
+const colorinLivingLatex = new Pinturas(11,"COLORIN LIVING LATEX", "Colorin", "blanco", "Interior", 6700, "./recursos/imagenes/COLORIN_LIVING_LATEX_X_4_LTS.png",1);
+const casablancaEntonador = new Pinturas(12, "CASABLANCA ENTONADOR", "Casablanca", [], "", 472, "./recursos/imagenes/CASABLANCA_ENTONADOR_120ML.png",1);
+const tersuaveEntonador = new Pinturas(13, "TERSUAVE ENTONADOR", "Tersuave", [], "", 849, "./recursos/imagenes/TERSUAVE_ENTONADOR_120ML.png",1);
+const albaEntonador = new Pinturas(14, "ALBA ENTONADOR", "ALBA", [], "", 500, "./recursos/imagenes/ALBA_ENTONADOR_120ML.png",1);
 
-const arrayPinturas = [colorete, colorshu, dicolor]
+const arrayPinturas = [albaObrasLatIntAntirreflex, albaFrentesYMurosBlanco4, albaFrentesYMurosBlanco10, albaFrentesYMurosBlanco20, casablancaProInterior4, casablancaProInterior10, casablancaProInterior20, casablancaPerformanceExtMateHidrorepelente4, casablancaPerformanceExtMateHidrorepelente10,casablancaPerformanceExtMateHidrorepelente20, colorinLivingLatex, casablancaEntonador, tersuaveEntonador, albaEntonador]
 
-let totalSinIva = 0;
-
-// aqui declaramos la funcion COMPRA DE PINTURA, donde se encuentra la seleccion de Marca, Color y de cuanto pagaraXLitros.
-//esta funcion tambien tiene un parametro (num1) con la cual le ponemos un orden a las compras que va realizando
-function comprarPintura(num1){
-
-    // aqui declaramos la funcion para seleccionar la MARCA
-    const selecionarMarca = ()=>{
-        let marcaSeleccionada = Number(prompt(`¿Qué marca de pintura desea? Seleccione el numero \n Selecciona la letra que corresponda: \n 1 - Colorete - $${colorete.precioPorLitro} el litro IVA no incluido. \n 2 - Colorshu - $${colorshu.precioPorLitro} el litro IVA no incluido. \n 3 - Dicolor - $${dicolor.precioPorLitro} el litro IVA no incluido.`));
-        //usamos .some para conseguir un valor true de marcaSeleccionada a partir de las id
-        if(arrayPinturas.some(pintura =>pintura.id === marcaSeleccionada)){
-            //una ves que tenemos un valor true filtramos las id para encontrar la marca que selecciono y retornamos un array nuevo de la marca seleccionada
-            const marcaArraySeleccionado = arrayPinturas.filter(pintura =>pintura.id === marcaSeleccionada)
-            return marcaArraySeleccionado[0];
-        }else{
-            alert("No contamos con esa marca");
-            
-            return selecionarMarca();
-        }
-    };
-    //llamamos la función de seleccion de marca 
-    let pintura = selecionarMarca();
-    
-    //declaramos funcion de seleccion de color
-    const selecionarColor = ()=>{
-        //uso un metodo para crear un array con los colores de la marca seleccionada
-        let arrayColores = pintura.devolverColor();
-        //uso el metodo .join() para crear un string con espacio y guion medio
-        const cadenaArrayColores = arrayColores.join("  -  ");
-        let colorLower = prompt(`¿Cuál color deseas?\nColores disponibles:  ` + cadenaArrayColores);
-        let color = colorLower.toLocaleLowerCase();
-        //esto es casi lo mismo que hice con la seleccion de marca, salvo que solo retorna un color
-        if(arrayColores.some(colores =>colores === color)){
-            const colorArraySeleccionado = arrayColores.filter(colores =>colores === color)
-            return colorArraySeleccionado;
-        }else{
-            alert("No contamos con ese color");
-            return selecionarColor();
-        }
-    };
-    
-    //llamamos a la funcion de seleccion de color
-    const colorSeleccionado = selecionarColor();
-    
-    //funcion para seleccion de cantidad de litros con un if para evitar que nos den un valor NAN y que coloren un valor menor a 1 o negativo
-    function litrosSeleccionados () {
-        let litrosPedidos = Number(prompt(`${pintura.marca} - ${colorSeleccionado}\n¿Cuántos litros necesita?`));
-            if((isNaN(litrosPedidos))){
-                return litrosSeleccionados();
-            }else if (litrosPedidos<1){
-                return litrosSeleccionados();
-            }else{
-                return litrosPedidos;
-        }
-    };
-    //llamamos a la funcion de la cantidad de litros que quiere comprar
-    let litros = litrosSeleccionados()
-
-    //funcion de lo que pagara por litro segun la marca que selecciono
-    const pagaraPorLitro = ()=>{
-        let precio = litros*pintura.precioPorLitro
-        return precio;
-    }
-    //llamomos a la funcion de lo que pagara por litro
-    const pagaraXLitro = pagaraPorLitro()
+//Array carrito
+let carrito = []
+carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-    totalSinIva = totalSinIva + pagaraXLitro;
-    
-    let compraste = `${num1} Marca: ${pintura.marca} - Color: ${colorSeleccionado} - Litros: ${litros} - Subtotal: $${pagaraXLitro}\n\nTotal: $${totalSinIva} sin IVA incluido`
-    //Nuestra funcion retorna un string con todos los datos recolectados
-    return compraste;
-};
-
-//Aqui declaramos una funcion donde tenemos un bucle "for", solo pueden hacer "4" pedidos
-//Tambien esta funcion con un bucle "for" le da el parametro a nuestra funcion "comprarPintura"
-function bucleDeCompra () {
-    for(let i=1; ((i<=4) && (comprar==true)); i++){
-        //aqui llamamos a nuestra funcion estrella compraPintura donde "i" es el parametro
-        let estasComprando = comprarPintura(`${i}:`);
-        alert(estasComprando);
-        //este console.log nos va imprimiendo en consola toda la orden de nuestr@ client@
-        console.log (estasComprando)
-        comprar = confirm("¿Queres seguir comprando?");
-        };
-};
-
-//declaramos funcion para evita dato null al pedirles su nombre.
-const buenNombre = ()=>{
-    let nombre = prompt("Buenas tardes. ¿Cúal es su nombre?")
-    if (nombre != null){
-        return nombre;
-    }else {
-        return buenNombre()
-    }
+const totalCarritoRender = () => {
+    const carritoTotal = document.getElementById("carritoTotal")
+    carritoTotal.innerHTML = ""
+    let total = carrito.reduce((acumulador, {precio, cantidad}) => {
+        return acumulador + (precio*cantidad)
+    }, 0)
+    carritoTotal.innerHTML = `El total de su compra es: $${total}`
 }
 
-// funciones del IVA.
-const iva = ()=>{
-    let aPagarDeIva = (totalSinIva*0.21);
-    return aPagarDeIva;
-}
-const masIva = ()=> {
-    let totalMasIva = (totalSinIva + iva());
-    return totalMasIva;
-}
 
-//llamamos a la funcion para que no de un nomber
-let nombre = buenNombre()
-//pedimos un confirm, si nos da el cliente un true comienza la compra
-let comprar = confirm(`Bienvenido a pinturerías Don Pepe estiamd@ ${nombre}.\n¿Deseas realizar una comprar?`);
+const renderizarProductos = ()=>{
+    //vinculamos y creamos un div, lo rellenamos, le agregamos className - lo vinculamos a un boton para despues este lo agregue al array del carrito
+    const contenedorProductos = document.getElementById ("contenedorCartas")
+    arrayPinturas.forEach(({id,nombre,marca,color,sitio,precio,imagen})=>{
+        const div = document.createElement ("div");
+        div.className = "col-xs-12 col-md-6 col-lg-4 col-xxl-3"
+        div.innerHTML = 
+            `<div class="card" id="producto${id}">  
+                <img src="${imagen}" class="card-img-top" alt="imagen de ${nombre}">
+                <div class="card-body h6 row justify-content-evenly align-content-end">
+                    <h5 class="card-title">${nombre}</h5>
+                    <p>${marca} - ${sitio} - ${color} </p>
+                    <p class="card-text card-precio">$${precio.toLocaleString(`es-ES`)}</p>
+                    <button class="btn btn-primary" id="btnProducto${id}">Agregar</button>
+                </div>
+            </div>`;
 
-//en este if converge todo
-if (comprar==true){
-    bucleDeCompra();
-    let apagarIva = iva();
-    let totalAPagarMasIva = masIva()
-    if(comprar==true){
-        //si el bucle llega a los "4" pedidos salta el alerta de llegaste al limite y finaliza la compra
-        const finExdenteCompra = `Subtotal a pagar: $${totalSinIva}  \nIVA a pagar: $${apagarIva}  \nTOTAL: $${totalAPagarMasIva}  \n\n¡Llegaste al limite de compra ${nombre} para este pedido!  \nPara continuar comprando, realice otro pedido  \n\nEstimad@ ${nombre}. ¡GRACIAS POR SU COMPRA!`;
-        alert(finExdenteCompra);
-        comprasEnCarrito.innerHTML= `<p>${finExdenteCompra}</p>`;
+        contenedorProductos.appendChild(div);
+
+        const boton = document.getElementById(`btnProducto${id}`)
+        boton.addEventListener(`click`, (e) => {
+            e.preventDefault()
+            agregarAlCarrito(id)
+        })
+    })
+}
+renderizarProductos()
+
+// agregar al carrito el producto, si este lla exste se le suma 1 en cantidad
+const agregarAlCarrito = (prodId) => {
+    const existe = carrito.some(prod => prod.id === prodId);
+    if(existe){
+        carrito = carrito.map(prod =>{
+            if(prod.id === prodId){
+                prod.cantidad++;
+            }
+            return prod;
+        })
     } else{
-        //si el/la clint@ pone en cancelar al preguntarle: "¿Queres seguir comprando?" tira este alert y finaliza la compra
-        const finCompra = `Subtotal a pagar: $${totalSinIva}  \nIVA a pagar: $${apagarIva}  \nTOTAL: $${totalAPagarMasIva}  \n\nEstimad@ ${nombre}.¡GRACIAS POR SU COMPRA!`;
-        alert(finCompra);
-        comprasEnCarrito.innerHTML= `<p>${finCompra}</p>`;
+        const item = arrayPinturas.find(prod => prod.id === prodId);
+        carrito.push({...item, cantidad: 1});
     }
+    renderizarCarrito();
+    totalCarritoRender();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 
 
+const borrarCarrito = () => {
+    carrito = []
+};
 
+// funcion para eliminar productos del carrito, vinculado al boton de la lista del del carrito
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((prod) => prod.id === prodId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice,1)
+    renderizarCarrito()
+    totalCarritoRender()
+}
+
+
+//creamos la lista de elementos del carrito con el array del carrito
+const renderizarCarrito = () => {
+    const listaCarrito = document.getElementById("listaCarrito")
+    listaCarrito.innerHTML=""
+    carrito.forEach(({nombre, precio, cantidad,id}) => {
+        let elementoLista = document.createElement("li")
+        elementoLista.innerHTML = `Producto: ${nombre} -- p/u: ${precio} -- cant.: ${cantidad}
+                                <button onclick = "eliminarDelCarrito(${id})" class="btn-close" aria-label="Close"></button>`
+        listaCarrito.appendChild(elementoLista)
+    })
+}; 
+
+const finalizaCompra = () => {
+    borrarCarrito ()
+    let mensaje = document.getElementById("carritoTotal")
+    mensaje.innerHTML = "Muchas gracias por su compra, lo esperamos pronto"
+}
+
+const compraFinal = document.getElementById("botonCompraFinal")
+compraFinal.addEventListener("click",(()=> {finalizaCompra()}))

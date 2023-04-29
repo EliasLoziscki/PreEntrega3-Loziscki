@@ -129,6 +129,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+div {
+  border: 2px solid black;
+}
+
 .navbar {
   background-color: rgb(201, 201, 201);
 }
@@ -146,7 +150,7 @@ body {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 95vh;
+  height: 70vh;
   border: 4px solid rgba(167, 139, 84, 0.8);
   box-shadow: 4px 3px 2px rgba(167, 139, 84, 0.8);
 }
@@ -158,22 +162,90 @@ body {
   color: rgba(167, 139, 84, 0.562);
 }
 
-.footer-majo {
+.selecionaCompra {
+  margin: auto;
+  margin-top: 55px;
+  font-size: 30px;
+  text-align: center;
   color: black;
 }
-.footer-majo ul {
+
+.contenedorCartas {
+  width: 100%;
+  margin: auto;
+  margin-top: 40px;
+  padding: 5px;
+}
+.contenedorCartas .card {
+  margin: 20px;
+  padding: auto;
+  border: 2px solid rgb(223, 185, 185);
+  box-shadow: 4px 0px 4px rgb(192, 166, 166);
+  background-color: rgb(201, 201, 201);
+}
+.contenedorCartas .card .card-body {
+  height: 220px;
+  padding: auto;
+  margin: 0px;
+}
+.contenedorCartas .card .card-body .card-precio {
+  font-weight: bolder;
+  unicode-bidi: embed;
+}
+
+.form-input {
+  margin-bottom: 10px;
+  max-width: 100px;
+  font-weight: bold;
+}
+
+.conteiner-carro {
+  display: flex;
+  justify-content: end;
+  margin: auto;
+  margin-bottom: 55px;
+  padding: 5px;
+}
+.conteiner-carro .btn {
+  margin: 20px;
+  border: 2px solid rgb(223, 185, 185);
+  box-shadow: 4px 0px 4px rgb(192, 166, 166);
+}
+
+.btn-close {
+  display: inline-block;
+  background-color: red;
+}
+
+.modal {
+  color: black;
+}
+
+.carritoTotal {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+footer {
+  border-top: 2px solid rgb(223, 185, 185);
+  box-shadow: 4px -2px 4px rgb(192, 166, 166);
+}
+footer .footer-majo {
+  color: black;
+}
+footer .footer-majo ul {
   padding: 0px;
   font-size: 0.8rem;
 }
-.footer-majo .img-fluid {
+footer .footer-majo .img-fluid {
   max-width: 250px;
 }
-.footer-majo .container-ico {
+footer .footer-majo .container-ico {
   display: flex;
   flex-direction: row;
   max-width: 250px;
 }
-.footer-majo .container-ico svg {
+footer .footer-majo .container-ico svg {
   color: black;
 }
 
@@ -181,17 +253,24 @@ body {
   .navbar-nav {
     font-size: 1.6rem;
   }
+  .contenedorCartas {
+    max-width: 60%;
+  }
+  .conteiner-carro {
+    max-width: 60%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .contenedorCartas {
+    max-width: 80%;
+  }
+  .conteiner-carro {
+    max-width: 80%;
+  }
 }
 @media screen and (min-width: 992px) {
-  .navbar {
-    position: fixed;
-    width: 100%;
-  }
   .navbar-nav {
     font-size: 2rem;
-  }
-  .espacio {
-    height: 126px;
   }
   .titulaso h1 {
     font-size: 6.5rem;

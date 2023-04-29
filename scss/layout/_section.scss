@@ -1,2 +1,72 @@
-//en mantenimiento
-//se inaugurada proximamente
+
+.selecionaCompra{
+    margin: auto;
+    margin-top: 55px;
+    font-size: 30px;
+    text-align: center;
+    color: black;
+    
+}
+
+.contenedorCartas{
+    width: 100%;
+    margin: auto;
+    margin-top: 40px;
+    padding: 5px;
+
+    .card{   
+        margin: 20px;
+        padding: auto;
+
+        border: 2px solid rgb(223, 185, 185);
+        box-shadow: 4px 0px 4px rgb(192, 166, 166);
+        background-color: rgb(201, 201, 201);
+
+        .card-body{
+            height: 220px;
+            padding: auto;
+            margin: 0px;
+
+            .card-precio{
+                font-weight: bolder;
+                unicode-bidi: embed;
+
+                
+            }
+        }
+    }
+}
+
+.form-input{
+    margin-bottom: 10px;
+    max-width: 100px;
+    font-weight: bold;
+}
+
+.conteiner-carro{
+    display: flex;
+    justify-content: end;
+    margin: auto;
+    margin-bottom: 55px;
+    padding: 5px;
+    .btn{
+        margin: 20px;
+        border: 2px solid rgb(223, 185, 185);
+        box-shadow: 4px 0px 4px rgb(192, 166, 166);
+    }
+}
+.btn-close{
+    display: inline-block;
+    background-color: red;
+}
+
+.modal{
+    color: black;
+}
+
+.carritoTotal{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
