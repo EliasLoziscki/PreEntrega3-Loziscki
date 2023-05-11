@@ -29,10 +29,10 @@ const albaEntonador = new Pinturas(14, "ALBA ENTONADOR", "ALBA", [], "", 500, ".
 
 const arrayPinturas = [albaObrasLatIntAntirreflex, albaFrentesYMurosBlanco4, albaFrentesYMurosBlanco10, albaFrentesYMurosBlanco20, casablancaProInterior4, casablancaProInterior10, casablancaProInterior20, casablancaPerformanceExtMateHidrorepelente4, casablancaPerformanceExtMateHidrorepelente10,casablancaPerformanceExtMateHidrorepelente20, colorinLivingLatex, casablancaEntonador, tersuaveEntonador, albaEntonador]
 
-//Array carrito
+//declaramos el array carrito el cual estrae su contenido gracias a Json del localStorage, en caso de que no exista ningún objeto “carrito” almacenado en el Local Storage, se crea un arreglo vacío.
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-
+//Declaramos la funcion que llebara el total de lo comprado y se podra visualizar en el carrito. Esta funcion la estaremos llamando cada ves que se produsca un cambio en el carrito haci se actualiza el valor total del carrito en la pagina
 const totalCarritoRender = () => {
     const carritoTotal = document.getElementById("carritoTotal")
     carritoTotal.innerHTML = ""
@@ -42,20 +42,32 @@ const totalCarritoRender = () => {
     carritoTotal.innerHTML = `El total de su compra es: $${total}`
 }
 
-//creamos la lista de elementos del carrito con el array del carrito
+//declaro una funcion para que pueda visualizar cuantos productos hay en el carrito. Esta funcion tambien la llamo cada vez que se actualiza los elementos de carrito, ya sea por agregado o eliminacion de productos
+const renderizarNumeroCarrito = () =>{
+    const cantidadTotalDeProductos = document.getElementById("numeroCarrito")
+    cantidadTotalDeProductos.innerText = "0"
+    let numeroTotal = carrito.reduce((acc, {cantidad}) => {
+        return acc + cantidad
+    }, 0)
+    cantidadTotalDeProductos.innerText = `${numeroTotal}`
+
+
+}
+
+//declaramos la funcion que creara la lista de producto que selecciona el usuario y podra ver en el carrito. esta funcion la estaremos llamando cada vez que se agregue o elimine un producto, haci se actualiza en la pagina estos cambios inmediatamente
 const renderizarCarrito = () => {
     const listaCarrito = document.getElementById("listaCarrito")
     listaCarrito.innerHTML=""
     carrito.forEach(({nombre, precio, cantidad,id}) => {
         let elementoLista = document.createElement("li")
         elementoLista.className = "row justify-content-between"
-        elementoLista.innerHTML = `Producto: ${nombre} -- p/u: ${precio} -- cant.: ${cantidad}
-                                <button onclick = "eliminarDelCarrito(${id})" class="btn-close" aria-label="Close"></button>`
-        listaCarrito.appendChild(elementoLista)
+        elementoLista.innerHTML = `${nombre} p/u: $${precio} -- cant.: ${cantidad}
+                                        <button onclick = "eliminarDelCarrito(${id})" class="btn-close" aria-label="Close"></button>`
+                                    listaCarrito.appendChild(elementoLista)
     })
 }; 
 
-// agregar al carrito el producto, si este lla exste se le suma 1 en cantidad
+// agregar al carrito el producto, si este ya existe se le suma 1 en cantidad
 const agregarAlCarrito = (prodId) => {
     const existe = carrito.some(prod => prod.id === prodId);
     if(existe){
@@ -71,11 +83,13 @@ const agregarAlCarrito = (prodId) => {
     }
     renderizarCarrito();
     totalCarritoRender();
+    renderizarNumeroCarrito();
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+//declaramos la función que creara los productos que visualizaremos en formato de card en la pagina
 const renderizarProductos = ()=>{
-    //vinculamos y creamos un div, lo rellenamos, le agregamos className - lo vinculamos a un boton para despues este lo agregue al array del carrito
+    //vinculamos y creamos un div, lo rellenamos, le agregamos className - vinculamos a un boton para despues este lo agregue al array del carrito
     const contenedorProductos = document.getElementById ("contenedorCartas")
     arrayPinturas.forEach(({id,nombre,marca,color,sitio,precio,imagen})=>{
         const div = document.createElement ("div");
@@ -87,7 +101,7 @@ const renderizarProductos = ()=>{
                     <h5 class="card-title">${nombre}</h5>
                     <p>${marca} - ${sitio} - ${color} </p>
                     <p class="card-text card-precio">$${precio.toLocaleString(`es-ES`)}</p>
-                    <button class="btn btn-primary" id="btnProducto${id}">Agregar</button>
+                    <button class="btn" id="btnProducto${id}">Agregar</button>
                 </div>
             </div>`;
 
@@ -101,28 +115,30 @@ const renderizarProductos = ()=>{
     })
 }
 
-
+//declaramos una función para vaciar completamnte el carrito
 const borrarCarrito = () => {
     carrito = []
 };
 
-// funcion para eliminar productos del carrito, vinculado al boton de la lista del del carrito
+// funcion para eliminar productos del carrito, vinculado al boton de la lista del carrito
 const eliminarDelCarrito = (prodId) => {
     const item = carrito.find((prod) => prod.id === prodId)
     const indice = carrito.indexOf(item)
     carrito.splice(indice,1)
     renderizarCarrito()
     totalCarritoRender()
+    renderizarNumeroCarrito();
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-
+//declaramos la funcion finalizar compra. Si el array carrito tiene al menos un elemento se puede realizar la compra. Esto implica que eliminemos los productos del carrito, guardamos en el localStorage el carrito vacio renderisemos el carrito y el total de la compra haci se actualiza lo borrado en la pagina y aparece el mensaje de gracias pos su compra
 const finalizaCompra = () => {
     if(carrito.length > 0){
         borrarCarrito()
         localStorage.setItem("carrito", JSON.stringify(carrito));
         renderizarCarrito();
         totalCarritoRender();
+        renderizarNumeroCarrito();
         let mensaje = document.getElementById("carritoTotal")
         mensaje.innerHTML = "Muchas gracias por su compra, lo esperamos pronto"
     }
@@ -133,6 +149,15 @@ const compraFinal = document.getElementById("botonCompraFinal")
 compraFinal.addEventListener("click",(()=> {finalizaCompra()})) 
 
 
+
+//llamamos a la funcion rederizarProductos para que cargue las card de los productos al html
 renderizarProductos()
-//renderizamosCarrito para al cargarse la pagina me cargue si hay elemnetos del carrito en el localStorage
+
+//llamo a totalCarritoRender haci al refrescar la pagina coloca el valor total de los productos que estan guardados en el localStorage
+totalCarritoRender()
+
+//renderizamosCarrito para al cargarse la pagina me cargue si hay elementos del carrito en el localStorage
 renderizarCarrito()
+
+//llamo a renederizarNumeroCarrito haci al refrescar la pagina coloca el numero de cuantos productos hay en el carrito si es que hay alguno producto guardado en el localStorage
+renderizarNumeroCarrito()

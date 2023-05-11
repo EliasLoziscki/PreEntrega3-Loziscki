@@ -9,6 +9,9 @@
     .conteiner-carro{
         max-width: 60%;
     }
+    .modal .modal-body{
+        font-size: 0.9rem;
+    }
 }
 
 @media screen and (min-width: 768px){
@@ -21,20 +24,16 @@
 }
 
 @media screen and (min-width: 992px) {
-    .navbar{
-
-    }
 
     .navbar-nav{
         font-size: 2rem;
     }
-    //dejo este espacio para que el position:fixed en el navbar no se coma una parte del background
-    // .espacio{
-    //     height: 126px;
-    // }
 
     .titulaso h1{
         font-size: 6.5rem;
+    }
+    .modal .modal-body{
+        font-size: 1.2rem;
     }
 }
 

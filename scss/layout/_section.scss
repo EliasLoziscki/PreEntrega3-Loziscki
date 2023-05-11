@@ -43,35 +43,34 @@ h2{
     }
 }
 
-.form-input{
-    margin-bottom: 10px;
-    max-width: 100px;
-    font-weight: bold;
-}
-
 .conteiner-carro{
     display: flex;
     justify-content: end;
     margin: auto;
     margin-bottom: 55px;
     padding: 5px;
-    .btn{
-        margin: 20px;
-        border: 2px solid rgb(223, 185, 185);
-        box-shadow: 4px 0px 4px rgb(192, 166, 166);
-    }
+        .numeroCarrito{
+            font-weight: bolder;
+            position: relative;
+            top: -55px;
+            left: 32px;
+        }
 }
-.btn-close{
-    display: inline-block;
-    background-color: rgb(151, 148, 148);
-}
+
 
 .modal{
     color: black;
+    .modal-header{
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+    .modal-body{
+        font-size: 0.7rem;
+    }
 }
 
 .carritoTotal{
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: bolder;
 }
 
