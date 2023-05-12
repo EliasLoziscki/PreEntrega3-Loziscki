@@ -132,6 +132,9 @@ body {
 .navbar {
   background-color: transparent;
 }
+.navbar .navbar-brand {
+  display: none;
+}
 
 .navbar-nav {
   font-size: 1.3rem;
@@ -253,39 +256,6 @@ footer .footer-majo .container-ico svg {
   color: black;
 }
 
-@media screen and (min-width: 576px) {
-  .navbar-nav {
-    font-size: 1.6rem;
-  }
-  .contenedorCartas {
-    max-width: 60%;
-  }
-  .conteiner-carro {
-    max-width: 60%;
-  }
-  .modal .modal-body {
-    font-size: 0.9rem;
-  }
-}
-@media screen and (min-width: 768px) {
-  .contenedorCartas {
-    max-width: 80%;
-  }
-  .conteiner-carro {
-    max-width: 80%;
-  }
-}
-@media screen and (min-width: 992px) {
-  .navbar-nav {
-    font-size: 2rem;
-  }
-  .titulaso h1 {
-    font-size: 6.5rem;
-  }
-  .modal .modal-body {
-    font-size: 1.2rem;
-  }
-}
 button {
   width: 165px;
   height: 62px;
@@ -326,6 +296,40 @@ button:active {
 .btn-comprar {
   background: #0bbb05;
   color: white;
+}
+
+@media screen and (min-width: 576px) {
+  .navbar-nav {
+    font-size: 1.6rem;
+  }
+  .contenedorCartas {
+    max-width: 60%;
+  }
+  .conteiner-carro {
+    max-width: 60%;
+  }
+  .modal .modal-body {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .contenedorCartas {
+    max-width: 80%;
+  }
+  .conteiner-carro {
+    max-width: 80%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .navbar-nav {
+    font-size: 2rem;
+  }
+  .titulaso h1 {
+    font-size: 6.5rem;
+  }
+  .modal .modal-body {
+    font-size: 1.2rem;
+  }
 }
 
 /*# sourceMappingURL=estilo.css.map */
