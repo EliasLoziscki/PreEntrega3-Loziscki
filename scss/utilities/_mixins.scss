@@ -1,0 +1,5 @@
+@mixin modalSeccionarCarrito($ancho, $flotante, $relleno){
+    width: $ancho;
+    float: $flotante;
+    padding: $relleno;
+}

@@ -59,6 +59,10 @@ li {
   list-style-type: none;
 }
 
+ul {
+  padding: 0%;
+}
+
 /* Configuramos anclas suaves */
 html {
   scroll-behavior: smooth;
@@ -156,9 +160,26 @@ body {
 .titulaso h1 {
   text-align: center;
   padding: 70px 10px;
-  text-shadow: 5px 2px 3px rgba(112, 112, 116, 0.205);
+  text-shadow: 2px 2px 0px black, 3px 3px 0px rgb(2, 245, 255), 4px 4px 0px rgb(255, 94, 247);
   font-size: 4rem;
   color: rgba(167, 139, 84, 0.562);
+}
+
+.clima {
+  color: black;
+  margin: 25px;
+}
+.clima p {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin: 0px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.clima .climaIco {
+  width: 60px;
+  height: 60px;
 }
 
 h2 {
@@ -222,6 +243,7 @@ h2 {
 }
 .modal .modal-body {
   font-size: 0.7rem;
+  padding: auto;
 }
 
 .carritoTotal {
@@ -230,7 +252,31 @@ h2 {
 }
 
 .gradienteCarrito {
-  background-image: linear-gradient(69.7deg, rgb(244, 37, 243) 1.4%, rgb(244, 87, 1) 36.2%, rgb(255, 204, 37) 72.2%, rgb(20, 196, 6) 113%);
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgb(255, 94, 247) 17.8%, rgb(2, 245, 255) 100.2%);
+}
+
+.nombre-col {
+  width: 64%;
+  float: left;
+  padding: 0%;
+}
+
+.precio-col {
+  width: 18%;
+  float: left;
+  padding: 0%;
+}
+
+.cantidad-col {
+  width: 10%;
+  float: right;
+  padding: 0%;
+}
+
+.boton-col {
+  width: 6%;
+  float: right;
+  padding: 0%;
 }
 
 footer {
@@ -294,8 +340,7 @@ button:active {
 }
 
 .btn-comprar {
-  background: #0bbb05;
-  color: white;
+  background: rgb(2, 245, 255);
 }
 
 @media screen and (min-width: 576px) {

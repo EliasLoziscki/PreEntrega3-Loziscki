@@ -1,3 +1,21 @@
+.clima{
+    color: black;
+    margin: 25px;
+    p{
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        margin: 0px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .climaIco{
+        width: 60px;
+        height: 60px;
+    }
+}
+
+
 h2{
     margin-top: 50px;
     color: black;
@@ -66,6 +84,7 @@ h2{
     }
     .modal-body{
         font-size: 0.7rem;
+        padding: auto;
     }
 }
 
@@ -75,7 +94,23 @@ h2{
 }
 
 .gradienteCarrito {
-    background-image: linear-gradient( 69.7deg,  rgba(244,37,243,1) 1.4%, rgba(244,87,1,1) 36.2%, rgba(255,204,37,1) 72.2%, rgba(20,196,6,1) 113% );
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  $ColorPrincipal 17.8%, $ColorSecondary 100.2% );;
 }
 
+//Lista de carrito, espacio para cada div
+.nombre-col {
+    @include modalSeccionarCarrito(64%, left, 0%);
+}
+
+.precio-col {
+    @include modalSeccionarCarrito(18%, left, 0%);
+}
+
+.cantidad-col {
+    @include modalSeccionarCarrito(10%, right, 0%);
+}
+
+.boton-col {
+    @include modalSeccionarCarrito(6%, right, 0%);
+}
 

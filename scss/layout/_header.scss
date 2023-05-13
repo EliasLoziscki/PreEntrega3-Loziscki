@@ -16,7 +16,7 @@
     h1{
         text-align: center;
         padding: 70px 10px;
-        text-shadow: 5px 2px 3px rgba(112, 112, 116, 0.205);
+        text-shadow: 2px 2px 0px black, 3px 3px 0px $ColorSecondary, 4px 4px 0px $ColorPrincipal;
         font-size: 4rem;
         color: rgba(167, 139, 84, 0.562);
     }

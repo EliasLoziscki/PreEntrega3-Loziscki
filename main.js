@@ -1,5 +1,5 @@
 //creamos una clase para las pinturas
-class Pinturas {
+class Pintura {
   constructor(id, nombre, marca, color, sitio, precio, imagen, cantidad) {
     this.id = id;
     this.nombre = nombre;
@@ -12,7 +12,7 @@ class Pinturas {
   }
 }
 
-const albaObrasLatIntAntirreflex = new Pinturas(
+const albaObrasLatIntAntirreflex = new Pintura(
   01,
   "ALBA OBRAS LAT INT ANTIRREFLEX",
   "Alba",
@@ -22,7 +22,7 @@ const albaObrasLatIntAntirreflex = new Pinturas(
   "./recursos/imagenes/ALBA_OBRAS_LAT_INT_ANTIRREFLEX.png",
   1
 );
-const albaFrentesYMurosBlanco4 = new Pinturas(
+const albaFrentesYMurosBlanco4 = new Pintura(
   02,
   "ALBA FRENTES Y MUROS BLANCO 4LTS",
   "Alba",
@@ -32,7 +32,7 @@ const albaFrentesYMurosBlanco4 = new Pinturas(
   "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",
   1
 );
-const albaFrentesYMurosBlanco10 = new Pinturas(
+const albaFrentesYMurosBlanco10 = new Pintura(
   03,
   "ALBA FRENTES Y MUROS BLANCO 10LTS",
   "Alba",
@@ -42,7 +42,7 @@ const albaFrentesYMurosBlanco10 = new Pinturas(
   "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",
   1
 );
-const albaFrentesYMurosBlanco20 = new Pinturas(
+const albaFrentesYMurosBlanco20 = new Pintura(
   04,
   "ALBA FRENTES Y MUROS BLANCO 20LTS",
   "Alba",
@@ -52,7 +52,7 @@ const albaFrentesYMurosBlanco20 = new Pinturas(
   "./recursos/imagenes/ALBAFRENT_FRENTES_Y_MUROS_BLANCO.png",
   1
 );
-const casablancaProInterior4 = new Pinturas(
+const casablancaProInterior4 = new Pintura(
   05,
   "CASABLANCA PRO INTERIOR 4LTS",
   "Casablanca",
@@ -62,7 +62,7 @@ const casablancaProInterior4 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",
   1
 );
-const casablancaProInterior10 = new Pinturas(
+const casablancaProInterior10 = new Pintura(
   06,
   "CASABLANCA PRO INTERIOR 10LTS",
   "Casablanca",
@@ -72,7 +72,7 @@ const casablancaProInterior10 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",
   1
 );
-const casablancaProInterior20 = new Pinturas(
+const casablancaProInterior20 = new Pintura(
   07,
   "CASABLANCA PRO INTERIOR 20LTS",
   "Casablanca",
@@ -82,7 +82,7 @@ const casablancaProInterior20 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PRO_INTERIOR_4_LTS.png",
   1
 );
-const casablancaPerformanceExtMateHidrorepelente4 = new Pinturas(
+const casablancaPerformanceExtMateHidrorepelente4 = new Pintura(
   08,
   "CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 4LTS",
   "Casablanca",
@@ -92,7 +92,7 @@ const casablancaPerformanceExtMateHidrorepelente4 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",
   1
 );
-const casablancaPerformanceExtMateHidrorepelente10 = new Pinturas(
+const casablancaPerformanceExtMateHidrorepelente10 = new Pintura(
   09,
   "CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 10LTS",
   "Casablanca",
@@ -102,7 +102,7 @@ const casablancaPerformanceExtMateHidrorepelente10 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",
   1
 );
-const casablancaPerformanceExtMateHidrorepelente20 = new Pinturas(
+const casablancaPerformanceExtMateHidrorepelente20 = new Pintura(
   10,
   "CASABLANCA PERFORMANCE EXT MATE HIDROREPELENTE 20LTS",
   "Casablanca",
@@ -112,7 +112,7 @@ const casablancaPerformanceExtMateHidrorepelente20 = new Pinturas(
   "./recursos/imagenes/CASABLANCA_PERFORMANCE_EXT_MATE.png",
   1
 );
-const colorinLivingLatex = new Pinturas(
+const colorinLivingLatex = new Pintura(
   11,
   "COLORIN LIVING LATEX",
   "Colorin",
@@ -122,7 +122,7 @@ const colorinLivingLatex = new Pinturas(
   "./recursos/imagenes/COLORIN_LIVING_LATEX_X_4_LTS.png",
   1
 );
-const casablancaEntonador = new Pinturas(
+const casablancaEntonador = new Pintura(
   12,
   "CASABLANCA ENTONADOR",
   "Casablanca",
@@ -132,7 +132,7 @@ const casablancaEntonador = new Pinturas(
   "./recursos/imagenes/CASABLANCA_ENTONADOR_120ML.png",
   1
 );
-const tersuaveEntonador = new Pinturas(
+const tersuaveEntonador = new Pintura(
   13,
   "TERSUAVE ENTONADOR",
   "Tersuave",
@@ -142,7 +142,7 @@ const tersuaveEntonador = new Pinturas(
   "./recursos/imagenes/TERSUAVE_ENTONADOR_120ML.png",
   1
 );
-const albaEntonador = new Pinturas(
+const albaEntonador = new Pintura(
   14,
   "ALBA ENTONADOR",
   "ALBA",
@@ -206,8 +206,26 @@ const renderizarCarrito = () => {
   carrito.forEach(({ nombre, precio, cantidad, id }) => {
     let elementoLista = document.createElement("li");
     elementoLista.className = "row justify-content-between";
-    elementoLista.innerHTML = `${nombre} p/u: $${precio} -- cant.: ${cantidad}
-                                        <button onclick = "eliminarDelCarrito(${id})" class="btn-close" aria-label="Close"></button>`;
+    let nombreDiv = document.createElement("div");
+    let precioDiv = document.createElement("div");
+    let cantidadDiv = document.createElement("div");
+    let botonDiv = document.createElement("div");
+
+    nombreDiv.className = "nombre-col";
+    precioDiv.className = "precio-col";
+    cantidadDiv.className = "cantidad-col";
+    botonDiv.className = "boton-col";
+
+    nombreDiv.innerHTML = nombre;
+    precioDiv.innerHTML = `p/u: $${precio}`;
+    cantidadDiv.innerHTML = `cant.: ${cantidad}`;
+    botonDiv.innerHTML = `<button onclick = "eliminarDelCarrito(${id})" class="btn-close" aria-label="Close"></button>`;
+
+    elementoLista.appendChild(nombreDiv);
+    elementoLista.appendChild(precioDiv);
+    elementoLista.appendChild(cantidadDiv);
+    elementoLista.appendChild(botonDiv);
+
     listaCarrito.appendChild(elementoLista);
   });
 };
@@ -301,37 +319,60 @@ const eliminarDelCarrito = (prodId) => {
 //usando la libreria SweetAlert
 
 const inicioDeSesion = () => {
-  Swal.fire({
-    title: "Inicia sesión",
-    html: `
+  if (localStorage.getItem("sesion_iniciada") !== "true") {
+    Swal.fire({
+      title: "Inicia sesión",
+      html: `
             <form>
                 <input type="text" id="login" class="swal2-input" placeholder="Usuario">
                 <input type="password" id="password" class="swal2-input" placeholder="Contraseña">
             </form>`,
-    confirmButtonText: "Iniciar",
-    focusConfirm: false,
-    preConfirm: () => {
-      const login = Swal.getPopup("").querySelector("#login").value;
-      const password = Swal.getPopup("").querySelector("#password").value;
-      const usuario = usuarios.find((e) => e.usuario === login && e.contrasenia == password);
-      if (!usuario) {
-        Swal.showValidationMessage(`Usuario o contraseña incorrectos. Usa: "andres" 123 o "luciana" 456`);
+      confirmButtonText: "Iniciar",
+      focusConfirm: false,
+      preConfirm: () => {
+        const login = Swal.getPopup("").querySelector("#login").value;
+        const password = Swal.getPopup("").querySelector("#password").value;
+        const usuario = usuarios.find(
+          (e) => e.usuario === login && e.contrasenia == password
+        );
+        if (!usuario) {
+          Swal.showValidationMessage(
+            `Usuario o contraseña incorrectos. Usa: "andres" 123 o "luciana" 456`
+          );
+          localStorage.setItem("sesion_iniciada", false);
+          return false;
+        } else {
+          localStorage.setItem("sesion_iniciada", true);
+          localStorage.setItem("usuario_registrado", login);
+          return true;
+        }
+      },
+    }).then((result) => {
+      if (result.value) {
+        let llamandoUsuario = localStorage.getItem("usuario_registrado");
+        Swal.fire(
+          `Bienvenid@ ${
+            llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)
+          }` // lo arme de esta forma, por que si en esta pagina implemento una formulario de registro y al nombre(en este caso usuario) pueda adaptarlo para el saludo, al registrarse deberia tener usuario, nombre y sexo por lo menos para un mensaje mas personalizado, aunque ya podria modigficar la primera letra del nombre al llenar el formulario. analizar mas profundamente. Idea futura
+        );
+      }
+    });
+  } else {
+    Swal.fire({
+      title: "Cierre de sesión",
+      text: "¿Deseas cerrar sesion?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
         localStorage.setItem("sesion_iniciada", false);
-        return false;
       } else {
         localStorage.setItem("sesion_iniciada", true);
-        localStorage.setItem("usuario_registrado", login);
-        return true;
       }
-    },
-  }).then((result) => {
-    if (result.value) {
-      let llamandoUsuario = localStorage.getItem("usuario_registrado");
-      Swal.fire(
-        `Bienvenid@ ${llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)}` // lo arme de esta forma, por que si en esta pagina implemento una formulario de registro y al nombre(en este caso usuario) pueda adaptarlo para el saludo, al registrarse deberia tener usuario, nombre y sexo por lo menos para un mensaje mas personalizado, aunque ya podria modigficar la primera letra del nombre al llenar el formulario. analizar mas profundamente. Idea futura
-      );
-    }
-  });
+    });
+  }
 };
 
 const alert = document.getElementById("botonSweetAlert");
@@ -386,3 +427,29 @@ renderizarCarrito();
 
 //llamo a renederizarNumeroCarrito haci al refrescar la pagina coloca el numero de cuantos productos hay en el carrito si es que hay alguno producto guardado en el localStorage
 renderizarNumeroCarrito();
+
+//Usando una api del tiempo, datos extraidos de: https://rapidapi.com/weatherapi/api/weatherapi-com
+nombreDeTuFuncion = () => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "6675d9964fmsh08ae9faaa2f3195p165946jsn523e5a8f78ac",
+      "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
+    },
+  };
+
+  fetch(
+    "https://weatherapi-com.p.rapidapi.com/current.json?q=-34.6%2C%20-58.3",
+    options
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const temperatura = data.current.temp_c;
+      const icono = data.current.condition.icon;
+
+      document.getElementById("temperatura").innerHTML = temperatura + "°C";
+      document.getElementById("icono").setAttribute("src", "https:" + icono);
+    })
+    .catch((error) => console.error(error));
+};
+nombreDeTuFuncion();
