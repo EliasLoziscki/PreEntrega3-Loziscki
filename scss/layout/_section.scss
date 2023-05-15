@@ -1,20 +1,3 @@
-.clima{
-    color: black;
-    margin: 25px;
-    p{
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        margin: 0px;
-        font-size: 1rem;
-        font-weight: bold;
-    }
-    .climaIco{
-        width: 60px;
-        height: 60px;
-    }
-}
-
 
 h2{
     margin-top: 50px;
@@ -42,7 +25,7 @@ h2{
         margin: 20px;
         padding: auto;
 
-        border: 2px solid rgb(223, 185, 185);
+        border: 2px solid $ColorBorde;
         box-shadow: 4px 0px 4px rgb(192, 166, 166);
         background-color: transparent;
 

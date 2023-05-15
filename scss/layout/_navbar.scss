@@ -1,7 +1,11 @@
 .navbar{
+    padding-top: 0px;
     background-color: transparent;
     .navbar-brand{
         display: none;
+    }
+    .nav-link{
+        padding-top: 0%;
     }
 }
 

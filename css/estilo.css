@@ -134,14 +134,35 @@ body {
 }
 
 .navbar {
+  padding-top: 0px;
   background-color: transparent;
 }
 .navbar .navbar-brand {
   display: none;
 }
+.navbar .nav-link {
+  padding-top: 0%;
+}
 
 .navbar-nav {
   font-size: 1.3rem;
+}
+
+.clima {
+  color: black;
+  padding-right: 38px;
+}
+.clima p {
+  width: 60px;
+  height: 25px;
+  text-align: center;
+  margin: 0px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.clima .climaIco {
+  width: 60px;
+  height: 25px;
 }
 
 .titulaso {
@@ -163,23 +184,6 @@ body {
   text-shadow: 2px 2px 0px black, 3px 3px 0px rgb(2, 245, 255), 4px 4px 0px rgb(255, 94, 247);
   font-size: 4rem;
   color: rgba(167, 139, 84, 0.562);
-}
-
-.clima {
-  color: black;
-  margin: 25px;
-}
-.clima p {
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  margin: 0px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-.clima .climaIco {
-  width: 60px;
-  height: 60px;
 }
 
 h2 {

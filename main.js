@@ -176,6 +176,8 @@ const usuarios = [
   { usuario: "luciana", contrasenia: 456 },
 ];
 
+let llamandoUsuario = localStorage.getItem("usuario_registrado");
+
 //declaramos el array carrito el cual estrae su contenido gracias a Json del localStorage, en caso de que no exista ningún objeto “carrito” almacenado en el Local Storage, se crea un arreglo vacío.
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -349,7 +351,6 @@ const inicioDeSesion = () => {
       },
     }).then((result) => {
       if (result.value) {
-        let llamandoUsuario = localStorage.getItem("usuario_registrado");
         Swal.fire(
           `Bienvenid@ ${
             llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)
@@ -381,34 +382,49 @@ alert.addEventListener("click", () => {
 });
 
 //declaramos la funcion finalizar compra. Si el array carrito tiene al menos un elemento se puede realizar la compra. Esto implica que eliminemos los productos del carrito, guardamos en el localStorage el carrito vacio renderisemos el carrito y el total de la compra haci se actualiza lo borrado en la pagina y aparece el mensaje de gracias pos su compra
+
 const finalizaCompra = () => {
-  if (localStorage.getItem("sesion_iniciada") === "true") {
-    if (carrito.length > 0) {
-      Swal.fire({
-        title: "Confirmar compra",
-        text: "¿Desea confirmar la compra?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Confirmar",
-        cancelButtonText: "Cancelar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          borrarCarrito();
-          localStorage.setItem("carrito", JSON.stringify(carrito));
-          renderizarCarrito();
-          totalCarritoRender();
-          renderizarNumeroCarrito();
-          let mensaje = document.getElementById("carritoTotal");
-          mensaje.innerHTML =
-            "Muchas gracias por su compra, lo esperamos pronto";
-        }
-      });
+  return new Promise((resuelto, rechazado) => {
+    if (localStorage.getItem("sesion_iniciada") === "true") {
+      if (carrito.length > 0) {
+        Swal.showLoading(); // Muestra la animación de carga
+        setTimeout(() => {
+          Swal.fire({
+            title: "Confirmar compra",
+            text: "¿Desea confirmar la compra?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              borrarCarrito();
+              localStorage.setItem("carrito", JSON.stringify(carrito));
+              renderizarCarrito();
+              totalCarritoRender();
+              renderizarNumeroCarrito();
+
+              Swal.fire({
+                title: `Muchas gracias ${llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)
+                } por su compra`,
+                text: "",
+                icon: "success",
+              });
+              resuelto(); // Resolvemos la promesa cuando la operación asincrónica finaliza correctamente
+            } else {
+              rechazado(); // Rechazamos la promesa si el usuario cancela la compra
+            }
+          });
+        }, 1500); // simulo una carga de 1.5seg. ¯\_(ツ)_/¯
+      } else {
+        mensajeEmergente("Tu carrito está vacío");
+        rechazado(); // Rechazamos la promesa si el carrito está vacío
+      }
     } else {
-      mensajeEmergente("Tu carrito esta vacio");
+      mensajeEmergente("Debes iniciar sesión para continuar");
+      rechazado(); // Rechazamos la promesa si el usuario no ha iniciado sesión
     }
-  } else {
-    mensajeEmergente("Debes iniciar sesion para continuar");
-  }
+  });
 };
 
 const compraFinal = document.getElementById("botonCompraFinal");
@@ -450,6 +466,11 @@ nombreDeTuFuncion = () => {
       document.getElementById("temperatura").innerHTML = temperatura + "°C";
       document.getElementById("icono").setAttribute("src", "https:" + icono);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error(error);
+      document.getElementById("temperatura").innerHTML = "";
+      document.getElementById("icono").setAttribute("src", "./recursos/icono/icono-color.png");
+    });
 };
+
 nombreDeTuFuncion();
