@@ -153,6 +153,7 @@ const albaEntonador = new Pintura(
   1
 );
 
+//array que contiene todas la pinturas
 const arrayPinturas = [
   albaObrasLatIntAntirreflex,
   albaFrentesYMurosBlanco4,
@@ -176,13 +177,14 @@ const usuarios = [
   { usuario: "luciana", contrasenia: 456 },
 ];
 
+//Declaramo una variable para usar donde sea adecuado usar el nombre de usuario de quien inicio sesion
 let llamandoUsuario = localStorage.getItem("usuario_registrado");
 
 //declaramos el array carrito el cual estrae su contenido gracias a Json del localStorage, en caso de que no exista ningún objeto “carrito” almacenado en el Local Storage, se crea un arreglo vacío.
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 //Declaramos la funcion que llebara el total de lo comprado y se podra visualizar en el carrito. Esta funcion la estaremos llamando cada ves que se produsca un cambio en el carrito haci se actualiza el valor total del carrito en la pagina
-const totalCarritoRender = () => {
+const renderizarTotalCarrito = () => {
   const carritoTotal = document.getElementById("carritoTotal");
   carritoTotal.innerHTML = "";
   let total = carrito.reduce((acumulador, { precio, cantidad }) => {
@@ -232,7 +234,14 @@ const renderizarCarrito = () => {
   });
 };
 
-// agregar al carrito el producto, si este ya existe se le suma 1 en cantidad
+//simplifcamos el codigo llamando solo a uno funcion para renderizar.
+const renderizado = () => {
+  renderizarCarrito();
+  renderizarTotalCarrito();
+  renderizarNumeroCarrito();
+};
+
+//declaro la funcion que agrega al carrito el producto seleccionado por el usuario, si este ya existe se le suma 1 en cantidad
 const agregarAlCarrito = (prodId) => {
   const existe = carrito.some((prod) => prod.id === prodId);
   if (existe) {
@@ -246,9 +255,7 @@ const agregarAlCarrito = (prodId) => {
     const item = arrayPinturas.find((prod) => prod.id === prodId);
     carrito.push({ ...item, cantidad: 1 });
   }
-  renderizarCarrito();
-  totalCarritoRender();
-  renderizarNumeroCarrito();
+  renderizado();
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
@@ -288,9 +295,7 @@ const renderizarProductos = () => {
                     <button class="btn" id="btnProducto${id}">Agregar</button>
                 </div>
             </div>`;
-
       contenedorProductos.appendChild(div);
-
       const boton = document.getElementById(`btnProducto${id}`);
       boton.addEventListener(`click`, (e) => {
         e.preventDefault();
@@ -302,9 +307,7 @@ const renderizarProductos = () => {
 };
 
 //declaramos una función para vaciar completamnte el carrito
-const borrarCarrito = () => {
-  carrito = [];
-};
+const borrarCarrito = () => carrito = [];
 
 // funcion para eliminar productos del carrito, vinculado al boton de la lista del carrito
 const eliminarDelCarrito = (prodId) => {
@@ -312,14 +315,24 @@ const eliminarDelCarrito = (prodId) => {
   const indice = carrito.indexOf(item);
   carrito.splice(indice, 1);
   mensajeEmergente("Eliminaste un producto");
-  renderizarCarrito();
-  totalCarritoRender();
-  renderizarNumeroCarrito();
+  renderizado();
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
-//usando la libreria SweetAlert
+//Declaro funcionDeConfirmacion la llamo para confirmar el cerre de sesión y para confimar la compra
+const funcionDeConfirmacion = (title, text) => {
+  return Swal.fire({
+    title: title,
+    text: text,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Confirmar",
+    cancelButtonText: "Cancelar",
+  });
+};
 
+
+//declarmo la funcion de inicio de sesion.
 const inicioDeSesion = () => {
   if (localStorage.getItem("sesion_iniciada") !== "true") {
     Swal.fire({
@@ -354,60 +367,46 @@ const inicioDeSesion = () => {
         Swal.fire(
           `Bienvenid@ ${
             llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)
-          }` // lo arme de esta forma, por que si en esta pagina implemento una formulario de registro y al nombre(en este caso usuario) pueda adaptarlo para el saludo, al registrarse deberia tener usuario, nombre y sexo por lo menos para un mensaje mas personalizado, aunque ya podria modigficar la primera letra del nombre al llenar el formulario. analizar mas profundamente. Idea futura
+          }` 
         );
       }
     });
   } else {
-    Swal.fire({
-      title: "Cierre de sesión",
-      text: "¿Deseas cerrar sesion?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.setItem("sesion_iniciada", false);
-      } else {
-        localStorage.setItem("sesion_iniciada", true);
+    funcionDeConfirmacion("Cierre de sesión", "¿Deseas cerrar sesion?").then(
+      (result) => {
+        if (result.isConfirmed) {
+          localStorage.setItem("sesion_iniciada", false);
+        } else {
+          localStorage.setItem("sesion_iniciada", true);
+        }
       }
-    });
+    );
   }
 };
 
+//se ejecuta la funcion de inicio de sesion al hacer click en el boton correspondiente
 const alert = document.getElementById("botonSweetAlert");
-alert.addEventListener("click", () => {
-  inicioDeSesion();
-});
+alert.addEventListener("click", inicioDeSesion);
 
-//declaramos la funcion finalizar compra. Si el array carrito tiene al menos un elemento se puede realizar la compra. Esto implica que eliminemos los productos del carrito, guardamos en el localStorage el carrito vacio renderisemos el carrito y el total de la compra haci se actualiza lo borrado en la pagina y aparece el mensaje de gracias pos su compra
 
+//declaramos la funcion para finalizar compra.
+//Si el carrito esta vacio no se puede comprar. Lo mismo sucede si no inicio sesion. Para cada una de estas dos condiciones, si estas se cumplen, saldra un mensaje que avisara por que no puedes hacer la compra
+//cuando se cumplen las dos condicones anteriores, mas la confimacion de la compra, se  eliminan los productos del carrito, guardamos en el localStorage el carrito vacio, renderisemos el carrito, el total y el numero del carrito.
+//y por ultimo aparece el mensaje de gracias por su compra con el usuario que inicio sesion.
 const finalizaCompra = () => {
   return new Promise((resuelto, rechazado) => {
     if (localStorage.getItem("sesion_iniciada") === "true") {
       if (carrito.length > 0) {
         Swal.showLoading(); // Muestra la animación de carga
         setTimeout(() => {
-          Swal.fire({
-            title: "Confirmar compra",
-            text: "¿Desea confirmar la compra?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Confirmar",
-            cancelButtonText: "Cancelar",
-          }).then((result) => {
+          funcionDeConfirmacion("Confirmar compra","¿Desea confirmar la compra?").then((result) => {
             if (result.isConfirmed) {
               borrarCarrito();
               localStorage.setItem("carrito", JSON.stringify(carrito));
-              renderizarCarrito();
-              totalCarritoRender();
-              renderizarNumeroCarrito();
-
+              renderizado();
               Swal.fire({
-                title: `Muchas gracias ${llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)
-                } por su compra`,
-                text: "",
+                title: `Muchas gracias ${llamandoUsuario[0].toUpperCase() + llamandoUsuario.substring(1)} por su compra`,
+                text: "Te esperamos nuevamente",
                 icon: "success",
               });
               resuelto(); // Resolvemos la promesa cuando la operación asincrónica finaliza correctamente
@@ -427,25 +426,21 @@ const finalizaCompra = () => {
   });
 };
 
+//ejecutamos la funcion finalizaCompra al hacer click en el boton correspondiente
 const compraFinal = document.getElementById("botonCompraFinal");
-compraFinal.addEventListener("click", () => {
-  finalizaCompra();
-});
+compraFinal.addEventListener("click", finalizaCompra);
+
 
 //llamamos a la funcion rederizarProductos para que cargue las card de los productos al html
-renderizarProductos();
+//Retraso la ejecución del renderizado de productos un momento para que no retrase el cargado del resto de la pagina
+window.addEventListener("load", () => setTimeout(renderizarProductos, 700)); // Retraso de 800 milisegundos (0.7 segundos)
 
-//llamo a totalCarritoRender haci al refrescar la pagina coloca el valor total de los productos que estan guardados en el localStorage
-totalCarritoRender();
+//llamomos a la funcione rendizar haci cuando ingresamos a la pagina, si tenemos datos en el localStorage los trae
+renderizado();
 
-//renderizamosCarrito para al cargarse la pagina me cargue si hay elementos del carrito en el localStorage
-renderizarCarrito();
-
-//llamo a renederizarNumeroCarrito haci al refrescar la pagina coloca el numero de cuantos productos hay en el carrito si es que hay alguno producto guardado en el localStorage
-renderizarNumeroCarrito();
-
+//usamos Fetch
 //Usando una api del tiempo, datos extraidos de: https://rapidapi.com/weatherapi/api/weatherapi-com
-nombreDeTuFuncion = () => {
+const tiempo = () => {
   const options = {
     method: "GET",
     headers: {
@@ -467,10 +462,13 @@ nombreDeTuFuncion = () => {
       document.getElementById("icono").setAttribute("src", "https:" + icono);
     })
     .catch((error) => {
+      // si ocurre un error durante la ejecución de la promesa se limpiara el contenido del elemento con el id "temperatura" y se establecera una imagen alternativa en el elemento con el id "icono".
       console.error(error);
       document.getElementById("temperatura").innerHTML = "";
-      document.getElementById("icono").setAttribute("src", "./recursos/icono/icono-color.png");
+      document
+        .getElementById("icono")
+        .setAttribute("src", "./recursos/icono/icono-color.png");
     });
 };
 
-nombreDeTuFuncion();
+tiempo();
