@@ -224,6 +224,11 @@ h2 {
   unicode-bidi: embed;
 }
 
+.filtro {
+  margin: auto;
+  padding: 13px;
+}
+
 .conteiner-carro {
   display: flex;
   justify-content: end;

@@ -145,7 +145,7 @@ const tersuaveEntonador = new Pintura(
 const albaEntonador = new Pintura(
   14,
   "ALBA ENTONADOR",
-  "ALBA",
+  "Alba",
   [],
   "",
   500,
@@ -170,6 +170,9 @@ const arrayPinturas = [
   tersuaveEntonador,
   albaEntonador,
 ];
+
+//declaramos un array que contendra los elementos filtrados
+const arrayFiltradoDePinturas = [];
 
 //usuarios registrados - datos de inicio de sesion
 const usuarios = [
@@ -276,12 +279,13 @@ const mensajeEmergente = (mensaje) => {
   }).showToast();
 };
 
+
 //declaramos la función que creara los productos que visualizaremos en formato de card en la pagina
 const renderizarProductos = () => {
   //vinculamos y creamos un div, lo rellenamos, le agregamos className - vinculamos a un boton para despues este lo agregue al array del carrito
   const contenedorProductos = document.getElementById("contenedorCartas");
-  arrayPinturas.forEach(
-    ({ id, nombre, marca, color, sitio, precio, imagen }) => {
+  contenedorProductos.innerHTML = "";
+  arrayFiltradoDePinturas.forEach(({ id, nombre, marca, color, sitio, precio, imagen }) => {
       const div = document.createElement("div");
       div.className = "col-xs-12 col-md-6 col-lg-4 col-xxl-3";
       div.innerHTML = `<div class="card" id="producto${id}">  
@@ -304,6 +308,56 @@ const renderizarProductos = () => {
       });
     }
   );
+};
+
+
+//declaro un funcion para filtrar productos segun su marca
+const filtradoPorMarca = (marcaSeleccionada) => {
+  const filtradoMarca = arrayPinturas.filter(e => e.marca === marcaSeleccionada);
+  arrayFiltradoDePinturas.length = 0; //limpia el arrayFiltradoDePinturas antes de filtrar nuevamente
+  arrayFiltradoDePinturas.push(...filtradoMarca);
+  renderizarProductos();
+};
+
+const contenedorFiltro = document.getElementById("filtro");
+//declaramos un conjunto de marcas unicas para evitar que se repitan las marcas a generar el listado del filtro
+const marcasUnicas = new Set(); 
+
+const renderizadoFiltro = () => {
+  const marcaDropdownMenu = document.getElementById("marcaDropdownMenu");
+  marcaDropdownMenu.innerHTML = "";
+
+  const opcionTodos = document.createElement("a");
+  opcionTodos.classList.add("dropdown-item");
+  opcionTodos.href = "#";
+  opcionTodos.innerText = "Todos";
+  opcionTodos.addEventListener("click", (event) => {
+    event.preventDefault();
+    arrayFiltradoDePinturas.length = 0; // Limpiar el arrayFiltradoDePinturas antes de filtrar nuevamente
+    arrayFiltradoDePinturas.push(...arrayPinturas.slice()); // Copia profunda del arrayPinturas
+    console.log(arrayFiltradoDePinturas);
+    renderizarProductos(); // Agregar esta línea para renderizar los productos nuevamente
+  });
+  marcaDropdownMenu.appendChild(opcionTodos);
+  
+  // verificamos que con la marca sea unica para que no aparezca un listado en el filtro con marcas repetidas
+  arrayPinturas.forEach(({ marca }) => {
+    if (!marcasUnicas.has(marca)) {
+      marcasUnicas.add(marca); // Agregar la marca al conjunto de marcas únicas
+
+      const opcionMarca = document.createElement("a");
+      opcionMarca.classList.add("dropdown-item");
+      opcionMarca.href = "#";
+      opcionMarca.innerText = marca;
+      opcionMarca.addEventListener("click", (event) => {
+        event.preventDefault();
+        arrayFiltradoDePinturas.length = 0;
+        filtradoPorMarca(marca);
+        renderizarProductos();
+      });
+      marcaDropdownMenu.appendChild(opcionMarca);
+    }
+  });
 };
 
 //declaramos una función para vaciar completamnte el carrito
@@ -431,9 +485,11 @@ const compraFinal = document.getElementById("botonCompraFinal");
 compraFinal.addEventListener("click", finalizaCompra);
 
 
+//llamamos a la funcion de renderizado de filtro
+renderizadoFiltro();
 //llamamos a la funcion rederizarProductos para que cargue las card de los productos al html
-//Retraso la ejecución del renderizado de productos un momento para que no retrase el cargado del resto de la pagina
-window.addEventListener("load", () => setTimeout(renderizarProductos, 700)); // Retraso de 800 milisegundos (0.7 segundos)
+//antes tenia una funcion para retrasar la renderizacion de los productos, pero con el filtro ya no hace falta
+renderizarProductos()
 
 //llamomos a la funcione rendizar haci cuando ingresamos a la pagina, si tenemos datos en el localStorage los trae
 renderizado();
